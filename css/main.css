@@ -1,0 +1,71 @@
+:root {
+    --primary-color: #01031b;
+    --secondary-color: #5d89c2;
+    --score-color: #dade00;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #202325;
+    background-image: url(../assets/imgs/background.jpg);
+    background-size: cover;
+    color: #ffffff;
+    font-family: "Major Mono Display";
+}
+
+.page {
+    background-color: black;
+    background-color: var(--primary-color);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #225586;
+}
+
+.selected {
+    border: 2px solid #ffffff;
+}
+
+.mainBTN {
+    padding: 5px 20px;
+    background-color: var(--primary-color);
+    background-color: #225586;
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.score {
+    font-size: 40px;
+}
+
+.score span {
+    padding: 5px 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--score-color);
+    color: var(--score-color);
+}

@@ -1,0 +1,98 @@
+.mainPage {
+    width: 90%;
+    height: 90vh;
+}
+
+.mainPage h1 {
+    font-size: 35px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.curr {
+    font-size: 30px;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    /* background-color: #225586; */
+    color: #ffffff;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.topBar i {
+    font-size: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    perspective: 1000px;
+    width: 100%; /* Make the card width responsive */
+    max-width: 180px; /* Set a maximum width for the card */
+    height: auto; /* Allow the height to adjust automatically */
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card img,
+.card-front,
+.card-back {
+    border: 3px solid var(--score-color);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background-color: #ffffff;
+    transform: rotatey(180deg);
+}
+
+.card-back {
+    background-color: #333333;
+    transform: rotatey(0deg);
+}
+
+/* to flip a card add class flipped to it */
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.restart {
+    background-color: var(--primary-color);
+}
+
+.restart:hover {
+    background-color: var(--primary-color);
+}
+
+.restart:hover i {
+    color: var(--score-color);
+}
