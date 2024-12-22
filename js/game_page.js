@@ -18,7 +18,7 @@ restartBtn.onclick = function () {
 };
 
 document.querySelector(".back").onclick = function () {
-    window.location.href = "start_page.html";
+    window.location.href = "index.html";
 };
 
 // Saving image paths

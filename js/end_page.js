@@ -7,7 +7,7 @@ restartBtn.onclick = function () {
 };
 
 backBtn.onclick = function () {
-    window.location.href = "start_page.html";
+    window.location.href = "index.html";
 };
 
 let score = document.querySelectorAll(".score span");
