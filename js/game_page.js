@@ -1,29 +1,42 @@
 let score = document.querySelector(".score span");
-score.textContent = window.localStorage.getItem("score");
+
+window.onload = function () {
+    if (window.localStorage.getItem("difficulty") == "easy") {
+        window.localStorage.setItem("score", 400);
+    } else if (window.localStorage.getItem("difficulty") == "medium") {
+        window.localStorage.setItem("score", 600);
+    } else {
+        window.localStorage.setItem("score", 800);
+    }
+    score.textContent = window.localStorage.getItem("score");
+};
 
 // Restart button
 let restartBtn = document.querySelector(".restart");
 restartBtn.onclick = function () {
     window.location.reload();
-    window.localStorage.setItem("score", window.localStorage.getItem("score"));
+};
+
+document.querySelector(".back").onclick = function () {
+    window.location.href = "start_page.html";
 };
 
 // Saving image paths
 let imgsPaths = [
-    "..//assets/imgs/cats/cat1.jpg",
-    "..//assets/imgs/cats/cat2.jpg",
-    "..//assets/imgs/cats/cat3.jpg",
-    "..//assets/imgs/cats/cat4.jpg",
-    "..//assets/imgs/cats/cat5.jpg",
-    "..//assets/imgs/cats/cat6.jpg",
-    "..//assets/imgs/cats/cat7.jpg",
-    "..//assets/imgs/cats/cat8.jpg",
-    "..//assets/imgs/cats/cat9.jpg",
-    "..//assets/imgs/cats/cat10.jpg",
-    "..//assets/imgs/cats/cat11.jpg",
-    "..//assets/imgs/cats/cat12.jpg",
+    "assets/imgs/cats/cat1.jpg",
+    "assets/imgs/cats/cat2.jpg",
+    "assets/imgs/cats/cat3.jpg",
+    "assets/imgs/cats/cat4.jpg",
+    "assets/imgs/cats/cat5.jpg",
+    "assets/imgs/cats/cat6.jpg",
+    "assets/imgs/cats/cat7.jpg",
+    "assets/imgs/cats/cat8.jpg",
+    "assets/imgs/cats/cat9.jpg",
+    "assets/imgs/cats/cat10.jpg",
+    "assets/imgs/cats/cat11.jpg",
+    "assets/imgs/cats/cat12.jpg",
 ];
-let cardBackImg = "..//assets/imgs/card-back.jpeg";
+let cardBackImg = "assets/imgs/card-back.jpeg";
 
 // Shuffling the array
 function shuffle(array) {
@@ -38,10 +51,10 @@ function shuffle(array) {
 function createCard(num) {
     let card = document.createElement("div");
     card.classList.add("card");
-    card.value = num;
 
     let innerCard = document.createElement("div");
     innerCard.classList.add("card-inner");
+    innerCard.setAttribute("value", num);
 
     // Adding front image
     let cardFront = document.createElement("div");
@@ -86,11 +99,96 @@ if (diff === "easy") {
         pairs.push(createCard(i));
         pairs.push(createCard(i));
     }
+    cardsContainer.style.gridTemplateRows = "repeat(3, 1fr)";
 }
 
 // Shuffling the pairs
 pairs = shuffle(pairs);
 
-pairs.forEach((card) => {
-    cardsContainer.appendChild(card);
-});
+let index = 0;
+let interval = setInterval(() => {
+    if (index < pairs.length) {
+        cardsContainer.appendChild(pairs[index]);
+        index++;
+    } else {
+        clearInterval(interval); // Clear the interval when all cards are added
+        addCardEventListeners();
+        flipAll();
+        setTimeout(() => {
+            flipAllBack();
+        }, 3000);
+    }
+}, 100);
+
+// Adding event listeners to the cards
+function addCardEventListeners() {
+    let flippedCards = [];
+    let cards = document.querySelectorAll(".card-inner");
+
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            if (
+                flippedCards.length < 2 &&
+                !card.classList.contains("flipped")
+            ) {
+                card.classList.add("flipped");
+                flippedCards.push(card);
+                console.log(flippedCards);
+                if (flippedCards.length == 2) {
+                    setTimeout(() => {
+                        checkMatch(flippedCards);
+                        flippedCards = [];
+                        let matchedCards =
+                            document.querySelectorAll(".matched");
+                        if (matchedCards.length == pairs.length) {
+                            setTimeout(() => {
+                                window.location.href = "end_page.html";
+                            }, 500);
+                        }
+                    }, 1000);
+                }
+            }
+        });
+    });
+}
+
+function checkMatch(cards) {
+    let card1 = cards[0].getAttribute("value");
+    let card2 = cards[1].getAttribute("value");
+    console.log(cards[0], cards[1]);
+    if (card1 == card2) {
+        cards[0].classList.add("matched");
+        cards[1].classList.add("matched");
+    } else {
+        cards[0].classList.remove("flipped");
+        cards[1].classList.remove("flipped");
+
+        score.textContent =
+            Number(score.textContent) - 30 < 0
+                ? 0
+                : Number(score.textContent) - 50;
+        window.localStorage.setItem("score", score.textContent);
+
+        if (score.textContent == 0) {
+            // alert("Game Over!");
+            flipAll();
+            setTimeout(() => {
+                window.location.href = "end_page.html";
+            }, 2000);
+        }
+    }
+}
+
+function flipAll() {
+    let cards = document.querySelectorAll(".card-inner");
+    cards.forEach((card) => {
+        card.classList.add("flipped");
+    });
+}
+
+function flipAllBack() {
+    let cards = document.querySelectorAll(".card-inner");
+    cards.forEach((card) => {
+        card.classList.remove("flipped");
+    });
+}
