@@ -22,6 +22,6 @@ if (
 }
 score[0].textContent =
     window.localStorage.getItem("score") == 0
-        ? "You Lose!"
+        ? "0!!!!"
         : window.localStorage.getItem("score");
 score[1].textContent = window.localStorage.getItem("highscore");
