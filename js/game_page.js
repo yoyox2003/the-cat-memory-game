@@ -141,6 +141,9 @@ function addCardEventListeners() {
                         let matchedCards =
                             document.querySelectorAll(".matched");
                         if (matchedCards.length == pairs.length) {
+                            matchedCards.forEach((card) => {
+                                card.style.transform = "rotateY(540deg)";
+                            });
                             setTimeout(() => {
                                 window.location.href = "end_page.html";
                             }, 500);
