@@ -109,3 +109,89 @@
 .restart:hover i {
     color: var(--score-color);
 }
+
+@media (max-width: 1300px) {
+    .mainPage {
+        width: 80%;
+        /* height: 80vh; */
+    }
+
+    .mainPage h1 {
+        font-size: 30px;
+        top: 25px;
+    }
+
+    .curr {
+        font-size: 25px;
+    }
+
+    .topBar {
+        height: 45px;
+        padding: 0 15px;
+    }
+
+    .topBar i {
+        font-size: 35px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(6, 1fr);
+        /* grid-template-rows: repeat(3, 1fr); */
+        gap: 15px;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+
+    .card img,
+    .card-front,
+    .card-back {
+        border-width: 2.5px;
+    }
+}
+
+@media (max-width: 700px) {
+    .mainPage {
+        width: 100%;
+        /* height: 150vh; */
+    }
+
+    .mainPage h1 {
+        display: none;
+        font-size: 25px;
+        top: 20px;
+    }
+
+    .curr {
+        font-size: 20px;
+    }
+
+    .topBar {
+        height: 40px;
+        padding: 0 10px;
+        margin-bottom: 30px;
+    }
+
+    .topBar i {
+        font-size: 30px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+        /* grid-template-rows: repeat(4, 1fr); */
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+        height: 100px;
+    }
+
+    .card img,
+    .card-front,
+    .card-back {
+        border-width: 2px;
+    }
+}
