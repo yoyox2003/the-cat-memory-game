@@ -88,18 +88,25 @@ if (diff === "easy") {
         pairs.push(createCard(i));
         pairs.push(createCard(i));
     }
-    cardsContainer.style.gridTemplateColumns = "repeat(6, 1fr)";
+    if (window.innerWidth <= 700) {
+        cardsContainer.style.gridTemplateColumns = "repeat(2, 1fr)";
+        cardsContainer.style.gridTemplateRows = "repeat(6, 1fr)";
+    } else cardsContainer.style.gridTemplateColumns = "repeat(6, 1fr)";
 } else if (diff === "medium") {
     for (let i = 0; i < 8; i++) {
         pairs.push(createCard(i));
         pairs.push(createCard(i));
     }
+    if (window.innerWidth <= 700)
+        cardsContainer.style.gridTemplateRows = "repeat(4, 1fr)";
 } else {
     for (let i = 0; i < 12; i++) {
         pairs.push(createCard(i));
         pairs.push(createCard(i));
     }
-    cardsContainer.style.gridTemplateRows = "repeat(3, 1fr)";
+    if (window.innerWidth <= 700)
+        cardsContainer.style.gridTemplateRows = "repeat(6, 1fr)";
+    else cardsContainer.style.gridTemplateRows = "repeat(3, 1fr)";
 }
 
 // Shuffling the pairs
